@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static/index'
+
   devise_for :users
   resources :posts
   root to: "public#all"
