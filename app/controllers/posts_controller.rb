@@ -4,13 +4,20 @@ class PostsController < ApplicationController
 
   # GET /posts
   # GET /posts.json
+  def home
+    @posts = Post.all
+  end
+
   def index
     @posts = current_user.posts
   end
 
   # GET /posts/1
   # GET /posts/1.json
-  def show
+  def show #code so only user id that matched post can edit/see this on their profile
+    if(@post.user.id != current_user.id)
+      redirect_to post_path
+    end
   end
 
   # GET /posts/new
@@ -26,7 +33,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-
+    @post.user = current_user
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }

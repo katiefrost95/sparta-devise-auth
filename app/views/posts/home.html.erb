@@ -1,0 +1,12 @@
+<h1>Home</h1>
+
+<h3>All Posts</h3>
+<% @posts.each do |post| %>
+    <p>ID: <%= post.user_id %></p>
+    <p> Title: <%= post.title %></p>
+    <%= post.body %><br>
+    <%= link_to 'Show', post %>
+    <%= link_to 'Edit', edit_post_path(post) %>
+    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+    --------------------------
+  <% end %>
